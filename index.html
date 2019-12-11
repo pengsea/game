@@ -43,7 +43,7 @@
     let wrap = document.getElementsByClassName('wrapper')[0];
     let rows = 7;   // 创建连连看行数
     let cols = 12;  // 创建连连看列数
-    let type = 2;   //选择多少种图片，0-24都可以  看自己心情 数字大种类多  数字小种类少游戏难度更简单
+    let type = 10;   //选择多少种图片，0-24都可以  看自己心情 数字大种类多  数字小种类少游戏难度更简单
     let squareSet = [];    // 生成小方块的数组
     let chooseOne = null; //
     let chooseTwo = null; //
@@ -62,6 +62,8 @@
         if (rows * cols % 2 !== 0) { //判断小方块总数是否为奇数，奇数就不执行
             alert('展示数量不能为奇数')  //  弹出提示，阻塞js加载
         }
+        let n = Math.floor(window.innerWidth / 80);//小屏幕自动适配
+        if (n < 12) cols = n;
         initSquareSet();
     }
 
@@ -78,7 +80,7 @@
         }
 
         for (let i = 1; i <= rows; i++) {  // 生成行数
-            for (let j = 1; j <= cols; j++) { // 生成列数 同理
+            for (let j = 0; j < cols; j++) { // 生成列数 同理
                 let temp = createSquare(tmp.pop(), i, j); // 参数每次取随机数数组的最后一位  i小方块在整体中行的位置j是列的位置   temp接收这个返回的DOM元素
                 squareSet[i][j] = temp;
                 wrap.append(temp);
