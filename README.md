@@ -2,4 +2,4 @@
 
 小游戏
 
-[点击访问](https://pengsea.github.io/game/index.html)
+[连连看](https://pengsea.github.io/game/index.html)
