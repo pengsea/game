@@ -1,7 +1,7 @@
 let wrap = document.getElementsByClassName('wrapper')[0];
 let rows = 7;   // 创建连连看行数
 let cols = 12;  // 创建连连看列数
-let type = 10;   //选择多少种图片，0-24都可以  看自己心情 数字大种类多  数字小种类少游戏难度更简单
+let type = 25;   //选择多少种图片，0-24都可以   数字大种类多  数字小种类少游戏难度更简单
 let squareSet = [];    // 生成小方块的数组
 let chooseOne = null; //
 let chooseTwo = null; //
@@ -11,13 +11,14 @@ window.onload = function () {
 };
 
 function init() {
+    //小屏幕自动适配
+    cols = Math.floor(window.innerWidth / 80);
+    //小屏幕自动适配
+    rows = Math.floor((window.innerHeight - 100) / 80);
     if (rows * cols % 2 !== 0) { //判断小方块总数是否为奇数，奇数就不执行
-        alert('展示数量不能为奇数')  //  弹出提示，阻塞js加载
+        rows--;
     }
-    let m = Math.floor(window.innerWidth / 80);//小屏幕自动适配
-    if (m < 12) cols = m;
-    let n = Math.floor((window.innerHeight - 100) / 80);//小屏幕自动适配
-    if (n < 7) rows = n;
+
     initSquareSet();
 }
 
@@ -65,7 +66,7 @@ function initSquareSet() {
 function time() {
     let len = Math.floor((new Date().getTime() - startTime) / 1000);
     if (len < 60) {
-        return len+' 秒';
+        return len + ' 秒';
     } else {
         return Math.floor(len / 60) + '分 ' + (len % 60) + '秒';
     }
