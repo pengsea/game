@@ -52,7 +52,9 @@ function initSquareSet() {
                     chooseOne = null;
                     chooseTwo = null;
                     if (wrap.children.length === 0) {
-                        alert('恭喜,游戏结束!用时: ' + time() + ' !!!');
+                        let text = time();
+                        alert('恭喜,游戏结束!用时: ' + text + ' !!!');
+                        save({time: new Date().toLocaleDateString(), score: text});
                         startTime = null;
                         init();
                     }
@@ -118,4 +120,26 @@ function render() {
 function clearSquare(x, y) {
     wrap.removeChild(squareSet[x][y]); // 删除方块
     squareSet[x][y] = null;
+}
+
+document.getElementsByClassName('leader-board')[0].addEventListener('click', function () {
+    if (document.getElementsByClassName('leader-board-wrapper')[0].style.display === 'block') {
+        document.getElementsByClassName('leader-board-wrapper')[0].style.display = 'none';
+        document.getElementsByClassName('wrapper')[0].style.display = 'block';
+    } else {
+        document.getElementsByClassName('leader-board-wrapper')[0].style.display = 'block';
+        document.getElementsByClassName('wrapper')[0].style.display = 'none';
+    }
+});
+//保存数据
+let localStorageKey = 'pengsea.game.lianliankan';
+
+function save(item) {
+    let obj = JSON.parse(localStorage.getItem(localStorageKey));
+    if (obj && obj.leaderboard) {
+        obj.leaderboard.push(item)
+    } else {
+        obj.leaderboard = [item];
+    }
+    localStorage.setItem(localStorageKey, JSON.stringify(obj));
 }
